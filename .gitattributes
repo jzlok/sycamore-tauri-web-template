@@ -1,2 +1,4 @@
+
+# this is to inform github to avoid counting the SCons files when considering the repo language
 SConstruct linguist-generated=true
 SConscript linguist-generated=true
