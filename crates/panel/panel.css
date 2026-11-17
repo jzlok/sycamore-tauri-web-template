@@ -1,0 +1,17 @@
+/* Panel content styles. Colours come from the custom properties (--bg, --fg, --chrome,
+   --raised, --border, --muted, --disabled, --accent, --accent-soft, --shadow)
+   defined in the app's styles.css. */
+
+.panel {
+  position: absolute;
+  inset: 0;
+  overflow: auto;
+  padding: 8px;
+  box-sizing: border-box;
+  font-size: 13px;
+}
+
+.panel-hint {
+  margin: 8px 2px;
+  color: var(--muted);
+}

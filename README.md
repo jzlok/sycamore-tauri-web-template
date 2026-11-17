@@ -30,5 +30,23 @@ cargo build -p sycamore-tauri-web-template-ui --target wasm32-unknown-unknown  #
 cargo build -p sycamore-tauri-web-template                                    # tauri backend
 ```
 
+## Docking window layout
+As an example of how to use this template comes with a basic docking window UI.
+
+The UI is a menu bar over a dock of tabbed, resizable panels, carried over from the Foundry editor in ferrite0. Drag a tab onto another panel's tab strip or centre to merge it as a tab, or onto an edge to split that panel; drag the dividers to resize; **View → Reset Layout** restores the starting arrangement.
+
+These live in their own crates under `crates/`, so you can keep or drop each one:
+
+| Crate | What it provides | Styles |
+|---|---|---|
+| [`panel`](crates/panel) | The `Panel` trait: a tab title and content | `crates/panel/panel.css` |
+| [`dock`](crates/dock) | `Dock`, `DockLayout` and `DockTree` (depends on `panel`) | `crates/dock/dock.css` |
+| [`menu`](crates/menu) | `MenuBar`, `Menu` and `MenuItem` | `crates/menu/menu.css` |
+| [`dialog`](crates/dialog) | `Dialog`: a basic modal with an OK button (used for **Help → About**) | `crates/dialog/dialog.css` |
+
+The app's own panels are in [src/panels.rs](src/panels.rs): add a `PanelId` variant, give it a title and content in its `Panel` impl, then place it in `default_layout`. The menus are built in [src/app.rs](src/app.rs). Panel content is rebuilt whenever the layout changes, so keep any long-lived state in context (signals) rather than inside a panel.
+
+To drop a crate, remove it from `[dependencies]` in the root `Cargo.toml`, remove its `<link data-trunk rel="css">` from [index.html](index.html) and its uses in `src/`, and delete its folder. The crates' stylesheets take their colours from the custom properties defined at the top of [styles.css](styles.css).
+
 ## Visual Studio Code
 There is a .vscode folder in this repository containing an extensions.json to assist in quicker setup for that environment.

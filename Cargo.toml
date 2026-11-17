@@ -7,9 +7,12 @@ edition = "2021"
 [dependencies]
 sycamore = { version = "0.9", features = ["suspense"] }
 console_error_panic_hook = "0.1.7"
+dialog = { path = "crates/dialog" }
+dock = { path = "crates/dock" }
+menu = { path = "crates/menu" }
 
 [workspace]
-members = ["src-tauri"]
+members = ["src-tauri", "crates/*"]
 
 # Read the optimization guideline for more details: https://tauri.app/concept/size/#cargo-configuration
 [profile.release]

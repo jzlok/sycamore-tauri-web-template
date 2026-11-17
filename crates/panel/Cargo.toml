@@ -1,0 +1,8 @@
+[package]
+name = "panel"
+description = "The Panel trait: a piece of UI that can be shown in a dock."
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+sycamore = "0.9"

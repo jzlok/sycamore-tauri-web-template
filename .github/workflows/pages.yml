@@ -1,0 +1,68 @@
+# Builds the Sycamore frontend with trunk and publishes it to GitHub Pages as a
+# live demo. Only the web build is deployed: the Tauri desktop shell can't run
+# in a browser.
+#
+# One-time setup: Settings -> Pages -> Build and deployment -> Source: GitHub Actions.
+
+name: Deploy to Pages
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# One deployment at a time; let an in-progress one finish rather than cancel it.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+env:
+  TRUNK_VERSION: v0.22.0
+
+jobs:
+  build:
+    # Repos created from this template get this workflow too; it only runs here
+    # so they don't start with a failing check before they've enabled Pages.
+    # Remove this line in your own repo to publish its demo as well.
+    if: github.repository == 'jzlok/sycamore-tauri-web-template'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: wasm32-unknown-unknown
+
+      - uses: Swatinem/rust-cache@v2
+
+      - name: Install trunk
+        run: |
+          curl -sSfL "https://github.com/trunk-rs/trunk/releases/download/${TRUNK_VERSION}/trunk-x86_64-unknown-linux-gnu.tar.gz" \
+            | tar -xz -C "$HOME/.cargo/bin"
+          trunk --version
+
+      # A project site is served from /<repo-name>/, not the domain root, so the
+      # page's asset URLs must carry that prefix.
+      - name: Build
+        run: trunk build --release --public-url "/${{ github.event.repository.name }}/"
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

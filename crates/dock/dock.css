@@ -1,0 +1,190 @@
+/* Dock styles. Colours come from the custom properties (--bg, --fg, --chrome,
+   --raised, --border, --muted, --disabled, --accent, --accent-soft, --shadow)
+   defined in the app's styles.css. */
+
+.dock {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.dock-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  background: var(--bg);
+}
+
+.tab-strip {
+  display: flex;
+  flex: none;
+  background: var(--chrome);
+  border-bottom: 1px solid var(--border);
+  font-size: 13px;
+  line-height: normal;
+  color: var(--muted);
+  user-select: none;
+}
+
+.tab {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-right: 1px solid var(--border);
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+}
+
+.tab.active {
+  background: var(--raised);
+  color: var(--fg);
+}
+
+.split {
+  display: flex;
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 0;
+}
+
+.split-row {
+  flex-direction: row;
+}
+
+.split-column {
+  flex-direction: column;
+}
+
+.split-item {
+  display: flex;
+  min-width: 0;
+  min-height: 0;
+}
+
+.split-item > .leaf,
+.split-item > .split {
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 0;
+}
+
+.resize-handle {
+  flex: none;
+  background: var(--border);
+  touch-action: none;
+}
+
+.resize-handle:hover,
+.resize-handle:active {
+  background: var(--accent);
+}
+
+.resize-handle-row {
+  width: 4px;
+  cursor: col-resize;
+}
+
+.resize-handle-column {
+  height: 4px;
+  cursor: row-resize;
+}
+
+.leaf {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+}
+
+.leaf-content {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.drop-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+}
+
+.drop-zone {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.drop-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 4px;
+  background: var(--raised);
+  border: 1px solid var(--accent-soft);
+  color: var(--accent);
+  font-size: 13px;
+}
+
+.drop-zone.hover .drop-icon {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.drop-zone.center {
+  inset: 15%;
+  border-radius: 4px;
+}
+
+.drop-zone.center.hover {
+  border: 1px solid var(--accent);
+}
+
+.drop-zone.left {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 18%;
+}
+
+.drop-zone.right {
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 18%;
+}
+
+.drop-zone.top {
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 18%;
+}
+
+.drop-zone.bottom {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 18%;
+}
+
+.drag-ghost {
+  position: fixed;
+  pointer-events: none;
+  z-index: 100;
+  background: var(--raised);
+  border: 1px solid var(--border);
+  padding: 4px 10px;
+  font-size: 13px;
+  line-height: normal;
+  border-radius: 3px;
+  box-shadow: 0 4px 10px var(--shadow);
+}

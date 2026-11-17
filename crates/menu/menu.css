@@ -1,0 +1,69 @@
+/* Menu bar styles. Colours come from the custom properties (--bg, --fg, --chrome,
+   --raised, --border, --muted, --disabled, --accent, --accent-soft, --shadow)
+   defined in the app's styles.css. */
+
+.menu-bar {
+  display: flex;
+  flex: none;
+  background: var(--chrome);
+  border-bottom: 1px solid var(--border);
+  font-size: 13px;
+  line-height: normal;
+  user-select: none;
+}
+
+.menu-bar .menu {
+  position: relative;
+}
+
+.menu-bar .menu-button {
+  display: block;
+  padding: 6px 12px;
+  background: none;
+  border: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.menu-bar .menu-button:hover,
+.menu-bar .menu-button.open {
+  background: var(--raised);
+}
+
+.menu-bar .menu-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 160px;
+  background: var(--raised);
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 12px var(--shadow);
+  padding: 4px 0;
+  z-index: 10;
+}
+
+.menu-bar .menu-dropdown button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 6px 14px;
+  background: none;
+  border: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.menu-bar .menu-dropdown button:hover {
+  background: var(--border);
+}
+
+.menu-bar .menu-dropdown button:disabled {
+  color: var(--disabled);
+  cursor: default;
+}
+
+.menu-bar .menu-dropdown button:disabled:hover {
+  background: none;
+}
