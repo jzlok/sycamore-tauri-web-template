@@ -1,4 +1,6 @@
 # Tauri + Sycamore Web and App Template
+**[Live demo](https://jzlok.github.io/sycamore-tauri-web-template/)**: the web build of this template, deployed to GitHub Pages on every push to `master` by [.github/workflows/pages.yml](.github/workflows/pages.yml).
+
 This template should help get you started using Rust to develop standalone ([Tauri](https://v2.tauri.app/)) apps and web applications, both using [Sycamore](https://sycamore.dev/) for UI.
 
 Note that Tauri doesn't insist on using Sycamore for its UI, nor even Rust for your frontend but that focus is the point of this template, which is the equivalent of a Rust, Tauri and Sycamore quickstart (although I am adding helper components over time).  It is a simple 'Hello World' and you will see where to put html into your view component in [src/app.rs](src/app.rs), demonstrating the most basic Sycamore programming right off the bat.
